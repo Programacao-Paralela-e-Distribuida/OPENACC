@@ -1,0 +1,20 @@
+#ifdef _OPENACC
+#include <accel.h>              // biblioteca OpenACC 
+#endif
+#include <mpi.h>
+int main(int argc, char *argv[]) { /* acc_funcoes.c   */
+int meu_ranque;
+  
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &meu_ranque); // meu ranque MPI
+
+#ifdef _OPENACC
+    acc_init(acc_device_nvidia); // chamada OpenACC
+    const int num_dev = acc_get_num_devices(acc_device_nvidia); //#GPUs
+    const int dev_id = meu_ranque % num_dev;
+    // atribui uma GPU para cada processo MPI
+    acc_set_device_num(dev_id, acc_device_nvidia);   
+    printf ("O processo MPI %d é atribuído à GPU %d \n", meu_ranque, dev_id);
+#endif
+  MPI_Finalize();
+}
