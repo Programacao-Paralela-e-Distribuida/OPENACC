@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <omp.h>
 
 #define COLUMNS    1000
 #define ROWS       1000
@@ -13,28 +14,31 @@ void iniciar();
 
 int main(int argc, char *argv[]) { /* jacobi_seq.c  */
 int i, j;
-int max_iterations=1000;
+int max_iterations=3000;
 int iteration=1;
 double dt=100;
 
     iniciar();
-
+    double inicio=omp_get_wtime();
     while (dt > MAX_TEMP_ERROR && iteration <= max_iterations ) {
-        for (i = 1; i <= ROWS; i++) 
-            for (j = 1; j <= COLUMNS; j++) {
-                Anew[i][j] = 0.25 * (A[i+1][j] + 
-                A[i-1][j] + A[i][j+1] + A[i][j-1]);
-            }
-        dt = 0.0;
-
-        for (i = 1; i <= ROWS; i++)
-            for (j = 1; j <= COLUMNS; j++) {
-                dt = fmax( fabs(Anew[i][j]-A[i][j]), dt);
-                A[i][j] = Anew[i][j];
-            }
-        iteration++;
+#pragma acc parallel loop   /* acc_jacobi1.c   */
+    for (i = 1; i <= ROWS; i++) 
+        for (j = 1; j <= COLUMNS; j++) {
+            Anew[i][j] = 0.25 * (A[i+1][j] + 
+            A[i-1][j] + A[i][j+1] + A[i][j-1]);
+        }
+    dt = 0.0;
+        
+#pragma acc parallel loop reduction(max:dt)
+    for (i = 1; i <= ROWS; i++) 
+        for (j = 1; j <= COLUMNS; j++) {
+            dt = fmax( fabs(Anew[i][j]-A[i][j]), dt);
+            A[i][j] = Anew[i][j];
+        }
+    iteration++;
     }
-    printf("\n Erro maximo na iteracao %d era %f\n", iteration-1, dt);
+    double fim=omp_get_wtime();
+    printf("\n Erro maximo na iteracao %d era %f. O tempo de execução foi de %f  segundos\n", iteration-1, dt, fim-inicio);
     return(0);
 }
 
