@@ -16,5 +16,5 @@ int meu_ranque;
     acc_set_device_num(dev_id, acc_device_nvidia);   
     printf ("O processo MPI %d é atribuído à GPU %d \n", meu_ranque, dev_id);
 #endif
-  MPI_Finalize();
+    MPI_Finalize();
 }

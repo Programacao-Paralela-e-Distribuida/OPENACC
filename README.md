@@ -1,1 +1,1 @@
-# acccode
+# Exemplos OpenACC
