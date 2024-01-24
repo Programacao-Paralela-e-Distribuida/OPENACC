@@ -1,10 +1,9 @@
 # Exemplos OpenACC
 Nesse repositório encontramos os exemplos em OpenACC utilizados no livro. A seguir listamos os procedimentos necessários para a preparação do ambiente de execução para utilização do OpenACC.
 
-## Preparação do Ambiente de Execução OpenACC {#sec:app_acc_instalacao}
+## Preparação do Ambiente de Execução OpenACC 
 
-### Introdução {#sec:app_acc_introducao}
-
+### Introdução 
 Antes de compilar qualquer código é importante saber quais dispositivos
 aceleradores estão configurados para uso no sistema. Existem alguns
 comandos que fornecem informações de modelos e características desses
@@ -61,7 +60,7 @@ $ pgaccelinfo | grep "Default Target:"
 Default Target:                cc35
 ```
 
-### Compiladores {#sec:app_acc_compiladores}
+### Compiladores
 
 Para compilar os códigos feitos em OpenACC, gerando código para execução
 em GPUs, é necessário o uso de compiladores que suportem OpenACC. A PGI
@@ -89,7 +88,7 @@ Nos exemplos apresentados neste livro foi utilizado o compilador da PGI
 disponibilizado para a comunidade, que pode ser baixado gratuitamente da
 página da NVIDIA[^1].
 
-#### Compilador PGI {#compilador-pgi-2 .unnumbered}
+#### Compilador PGI 
 
 Para compilar códigos em C usaremos o comando *pgcc*, e para compilação
 de códigos em C++ usar o comando *pgc++*. Algumas parâmetros básicos
@@ -118,7 +117,7 @@ $ pgcc -acc -ta=nvidia -Minfo=accel main.c
 $ pgc++ -acc -ta=nvidia -Minfo=accel main.cpp
 ```
 
-#### Compilador GCC {#compilador-gcc-2 .unnumbered}
+#### Compilador GCC 
 
 Como dito, uma outra alternativa é o compilador GNU GCC que, sendo um
 compilador *opensource*, não requer licença para uso. Para habilitar a
@@ -141,9 +140,9 @@ linha de comando. O mesmo será executado pelo processador hospedeiro e
 as partes que devem ser executadas pelo acelerador serão automaticamente
 enviadas, sem necessidade de nenhuma configuração adicional.
 
-### Variáveis de ambiente {#sec:app_acc_ambiente}
+### Variáveis de ambiente 
 
-#### Compilador PGI {#compilador-pgi-3 .unnumbered}
+#### Compilador PGI 
 
 Para o compilador PGI as seguintes variáveis de ambiente podem ser
 utilizadas:
@@ -231,7 +230,7 @@ utilizadas:
     Define o número máximo de gangues (blocos de *thread* CUDA) que
     serão iniciados para um *kernel*.
 
-#### Compilador GCC {#compilador-gcc-3 .unnumbered}
+#### Compilador GCC 
 
 Para o compilador GCC são consideradas as seguintes variáveis de
 ambiente:
