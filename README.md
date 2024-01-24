@@ -32,19 +32,17 @@ NVIDIA específicos para cada tipo de arquitetura e modelo. Conforme o
 modelo do acelerador, o sistema identifica um dispositivo específico e
 sua capacidade de computação conforme relação abaixo.
 
-   **Arquitetura**   **Dispositivo**   **capacidade de computação**
-  ----------------- ----------------- ------------------------------
-       Ampere             cc80                     8.0
-       Turing             cc75                     7.5
-        Volta             cc72                     7.2
-        Volta             cc70                     7.0
-       Pascal             cc62                     6.2
-       Pascal             cc60                     6.0
-       Maxwell            cc50                     5.0
-       Kepler             cc35                     3.5
-       Kepler             cc30                     3.0
-
-  : Capacidade computacional
+  | **Arquitetura**  | **Dispositivo** |  **capacidade de computação** |
+  | ----------------- | ----------------- | ------------------------------ |
+  |     Ampere      |       cc80          |           8.0                |
+  |     Turing      |       cc75          |           7.5                |
+  |      Volta      |       cc72          |           7.2                |
+  |      Volta      |       cc70          |           7.0                |
+  |     Pascal      |       cc62          |           6.2                |
+  |     Pascal      |       cc60          |           6.0                |
+  |     Maxwell     |       cc50          |           5.0                |
+  |     Kepler      |       cc35          |           3.5                |
+  |     Kepler     |        cc30          |           3.0                |
 
 Quando o código é compilado ele identifica qual o *driver* NVIDIA está
 instalado e gera o binário do código. O comando *nvidia-smi* fornece
@@ -97,18 +95,17 @@ parâmetros definem em qual dispositivo o código é executado de acordo
 com a arquitetura. Relação dos principais parâmetros usados no comando
 *pgcc*:
 
-  **Parâmetro**   **Descrição**
-  --------------- -----------------------------------------------------------
-  -fast           faz a otimização do código
-  -acc            habilita o uso de diretivas OpenACC
-  -Minfo=accel    informações sobre quais partes do código foram aceleradas
-  -Minfo=opt      informações sobre todas as otimizações de código
-  -Minfo=all      informações sobre todas as saídas de código
-  -ta=host        compila o código em modo serial
-  -ta=multicore   compila o código usando *threads* em CPU
-  -ta=nvidia      compila o código usando NVIDIA
 
-  : Parâmetros de Compilação pgcc
+  |**Parâmetro**  |  **Descrição** |
+  | --------------- | ----------------------------------------------------------- |
+  | -fast           | faz a otimização do código                                  |
+  | -acc            | habilita o uso de diretivas OpenACC  |
+  | -Minfo=accel    | informações sobre quais partes do código foram aceleradas |
+  | -Minfo=opt      | informações sobre todas as otimizações de código |
+  | -Minfo=all      | informações sobre todas as saídas de código |
+  | -ta=host        | compila o código em modo serial |
+  | -ta=multicore   | compila o código usando *threads* em CPU |
+  | -ta=nvidia      | compila o código usando NVIDIA |
 
 Alguns exemplos de uso do compilador PGI e seus parâmetros básicos.
 
@@ -204,17 +201,13 @@ utilizadas:
     **acc_set_device_type (devicetype)**, onde *devicetype* no
     compilador PGI pode ter um dos seguintes valores:
 
-    ::: {#tab:acc_device_none_pgi}
-      ------------------------------ ---------------------------
-      acc_device_none = 0            acc_device_default = 1
-      acc_device_host = 2            acc_device_not_host = 3
-      acc_device_nvidia = 4          acc_device_pgi_opencl = 7
-      acc_device_nvidia_opencl = 8   acc_device_opencl = 9
-      acc_device_current = 10        
-      ------------------------------ ---------------------------
-
-      : Valores para devicetype no PGI
-    :::
+     |                                |                             |
+     | ------------------------------ | --------------------------- |
+     | acc_device_none = 0            | acc_device_default = 1 |
+     | acc_device_host = 2            | acc_device_not_host = 3 |
+     | acc_device_nvidia = 4          | acc_device_pgi_opencl = 7 |
+     | acc_device_nvidia_opencl = 8   | acc_device_opencl = 9 |
+     | acc_device_current = 10        |                             |
 
 -   **PGI_ACC_DEVICE_NUM**
 
@@ -248,17 +241,13 @@ ambiente:
     ambiente ou por uma chamada para a função **acc_set_device_type
     (devicetype)**, onde *devicetype* no compilador GCC pode ter um dos
     seguintes valores:
-
-    ::: {#tab:acc_device_none_gcc}
-      ------------------------- -----------------------
-      acc_device_current = -1   acc_device_none = 0
-      acc_device_default = 1    acc_device_host = 2
-      acc_device_not_host = 4   acc_device_nvidia = 5
-      acc_device_radeon = 8     
-      ------------------------- -----------------------
-
-      : Valores para devicetype no GCC
-    :::
+    
+     |                           |                         |
+     | ------------------------- | ----------------------- |
+     | acc_device_current = -1   | acc_device_none = 0     |
+     | acc_device_default = 1    | acc_device_host = 2 |
+     | acc_device_not_host = 4   | acc_device_nvidia = 5 |
+     | acc_device_radeon = 8     |                        |
 
 -   **ACC_DEVICE_NUM**
 
