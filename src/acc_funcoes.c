@@ -18,3 +18,4 @@ int meu_ranque;
 #endif
     MPI_Finalize();
 }
+
