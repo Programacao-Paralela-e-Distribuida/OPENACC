@@ -1,5 +1,8 @@
 # Exemplos OpenACC
-Nesse repositório encontramos os exemplos em OpenACC utilizados no livro. A seguir listamos os procedimentos necessários para a preparação do ambiente de execução para utilização do OpenACC.
+Nesse repositório encontramos os exemplos em OpenACC utilizados no livro
+Porgramação Paralela e Distribuída da editora Casa do Código. 
+Mais recursos  para o livro estão disponíveis na seguinte [página](programacao-paralela-e-distribuida.github.io)
+A seguir listamos os procedimentos necessários para a preparação do ambiente de execução para utilização do OpenACC.
 
 ## Preparação do Ambiente de Execução OpenACC 
 
